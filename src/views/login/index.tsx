@@ -1,6 +1,6 @@
 import { defineComponent, reactive } from 'vue';
-// import 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js';
 import './login.scss';
+import {} from '@/api/';
 
 // 用户名密码登录
 const PasswordCounter = defineComponent({
@@ -11,6 +11,13 @@ const PasswordCounter = defineComponent({
     const state = reactive({
       login_info: { user: '', password: '' }
     });
+    const signIn = async () => {
+      const send_data = {
+        user: state.login_info.user,
+        password: state.login_info.password
+      };
+      // const {message} = await
+    };
     return () => (
       <el-form ref="ruleForm" model={state.login_info} status-icon class="demo-ruleForm">
         <el-form-item prop="pass">
@@ -27,7 +34,7 @@ const PasswordCounter = defineComponent({
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button class="w100 btn-opacity" type="primary" onClick="resetForm('ruleForm')">
+          <el-button class="w100 btn-opacity" type="primary" onClick="signIn">
             登陆
           </el-button>
         </el-form-item>

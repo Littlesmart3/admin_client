@@ -1,5 +1,5 @@
 // api接口地址
-export const URL = 'https://www.littlesmart3.top/api/';
+export const URL = 'https://www.admin.littlesmart3.top/api/';
 
 // 网站备案信息
 export const RECORD = {
