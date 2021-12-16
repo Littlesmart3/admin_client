@@ -1,6 +1,8 @@
 import { defineComponent, reactive } from 'vue';
 import './login.scss';
-import {} from '@/api/';
+import { LoginAPI } from '@/api/login';
+import { ElMessage } from 'element-plus';
+import router from '@/router';
 
 // 用户名密码登录
 const PasswordCounter = defineComponent({
@@ -12,11 +14,18 @@ const PasswordCounter = defineComponent({
       login_info: { user: '', password: '' }
     });
     const signIn = async () => {
-      const send_data = {
-        user: state.login_info.user,
-        password: state.login_info.password
-      };
-      // const {message} = await
+      // const send_data = {
+      //   user: state.login_info.user,
+      //   password: state.login_info.password
+      // };
+      // const { message } = await LoginAPI.passportLogin(send_data);
+      // console.log(message);
+      if (state.login_info.user === 'admin' && state.login_info.password == '123456') {
+        ElMessage.success('登录成功！');
+        router.push('/');
+      } else {
+        ElMessage.error('登录失败！');
+      }
     };
     return () => (
       <el-form ref="ruleForm" model={state.login_info} status-icon class="demo-ruleForm">
@@ -34,7 +43,7 @@ const PasswordCounter = defineComponent({
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button class="w100 btn-opacity" type="primary" onClick="signIn">
+          <el-button class="w100 btn-opacity" type="primary" onClick={signIn}>
             登陆
           </el-button>
         </el-form-item>

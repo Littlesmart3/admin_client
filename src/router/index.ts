@@ -4,10 +4,6 @@ import { createRouter, createWebHashHistory, NavigationGuardNext, RouteLocationN
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
-  },
-  {
-    path: '/home',
     name: 'home',
     meta: { type: 'home' },
     // component: () => import('@/views/home')
