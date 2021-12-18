@@ -107,7 +107,7 @@ import Log from '@/assets/img/login/log.svg';
 import Register from '@/assets/img/login/register.svg';
 import { User, Lock, Iphone } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
+import { ElMessage } from 'element-plus/lib';
 
 export default defineComponent({
   name: 'home',
