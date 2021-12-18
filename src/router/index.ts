@@ -1,10 +1,12 @@
+import { store } from '@/store';
 import { createRouter, createWebHashHistory, RouteComponent, RouteRecordRaw } from 'vue-router';
-import home from '../views/home/index.vue';
+import moment from 'moment';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
+    meta: { requireAuth: true },
     component: (): RouteComponent => import('@/views/home/index.vue') //首页
   },
   {
@@ -17,6 +19,19 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (localStorage.info) {
+      if (moment(new Date()).unix() > JSON.parse(localStorage.info).expire_time) {
+        localStorage.clear();
+      }
+      next();
+    } else router.push('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;

@@ -15,7 +15,7 @@
               <div class="row-center col-center">
                 <el-icon class="row-center col-center"> <lock /></el-icon>
               </div>
-              <el-input type="password" placeholder="Password" v-model="sign_in.password" show-password />
+              <el-input type="password" placeholder="Password" v-model="sign_in.password" show-password @keyup.enter="signInConfirm" />
             </div>
             <el-button class="btn solid fs16" @click="signInConfirm">登 录</el-button>
             <div v-if="false">
@@ -54,7 +54,7 @@
               <div class="row-center col-center">
                 <el-icon class="row-center col-center"> <lock /></el-icon>
               </div>
-              <input type="password" placeholder="Password" v-model="sign_up.password" show-password />
+              <el-input type="password" placeholder="Password" v-model="sign_up.password" show-password />
             </div>
             <el-button class="btn solid fs16" @click="signUpConfirm">注 册</el-button>
             <div v-if="false">
@@ -108,6 +108,7 @@ import Register from '@/assets/img/login/register.svg';
 import { User, Lock, Iphone } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus/lib';
+import moment from 'moment';
 
 export default defineComponent({
   name: 'home',
@@ -135,6 +136,10 @@ export default defineComponent({
     const signInConfirm = () => {
       // const send_data = { username: state.sign_in.username, password: state.sign_in.password };
       if (state.sign_in.username == 'admin' && state.sign_in.password == '123456') {
+        localStorage.info = JSON.stringify({
+          expire_time: moment(new Date()).unix() + 86400,
+          data: { name: state.sign_in.username }
+        });
         router.push('/');
       } else {
         ElMessage.error('用户名或密码错误！');
