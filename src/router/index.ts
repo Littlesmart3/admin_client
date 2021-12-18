@@ -5,14 +5,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    meta: { type: 'home' },
-    // component: () => import('@/views/home')
+    meta: { type: 'home', title: '主页' },
     component: () => import('@/views/home')
   },
   {
     path: '/login',
     name: 'login',
-    meta: { type: 'login' },
+    meta: { type: 'login', title: '登录' },
     component: () => import('@/views/login')
   },
   {

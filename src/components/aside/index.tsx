@@ -1,35 +1,33 @@
 import { menu_list } from '@/assets/setting';
 import { defineComponent, onMounted, reactive, ref } from 'vue';
-// import moduleCss from './index.module.scss';
-import './index.module.scss';
+import './index.scss';
+import { useRouter } from 'vue-router';
 
 // 菜单类型
 const MenuType = defineComponent({
   name: 'menu-type',
   setup() {
-    // 菜单类型 -- el-sub-menu
+    // 二级菜单
     const elSubMenu = (val: any) => {
       // 自定义title
-      const slots = (val: any) => {
+      const titleSlot = (val: any) => {
         return {
-          title: () => {
-            return (
-              <div>
-                <el-icon>
-                  <val.icon />
-                </el-icon>
-                <span>{val.name}</span>
-              </div>
-            );
-          }
+          title: () => (
+            <div>
+              <el-icon>
+                <val.icon />
+              </el-icon>
+              <span>{val.name}</span>
+            </div>
+          )
         };
       };
       return (
-        <el-sub-menu key={val.id} index={val.id.toString()} v-slots={slots(val)}>
+        <el-sub-menu key={val.id} index={val.id.toString()} v-slots={titleSlot(val)}>
           {val.children.map((item: any) => {
             return (
               <el-menu-item key={item.id} index={item.id.toString()}>
-                <el-icon />
+                <div class="ml10"></div>
                 <span>{item.name}</span>
               </el-menu-item>
             );
@@ -38,17 +36,15 @@ const MenuType = defineComponent({
       );
     };
 
-    // 菜单类型 -- el-menu-item
+    // 一级菜单
     const elMenuItem = (val: any) => {
-      const slots = (val: any) => {
+      const titleSlot = (val: any) => {
         return {
-          title: () => {
-            return <span>{val.name}</span>;
-          }
+          title: () => <span>{val.name}</span>
         };
       };
       return (
-        <el-menu-item key={val.id.toString()} index={val.id.toString()} v-slots={slots(val)}>
+        <el-menu-item key={val.id} index={val.id.toString()} v-slots={titleSlot(val)}>
           <el-icon>
             <val.icon></val.icon>
           </el-icon>
@@ -68,40 +64,43 @@ const MenuType = defineComponent({
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
+
+    const mini_logo = '';
+    const logo = '';
     const state = reactive({
       active_text_color: '#ffd04b',
       background_color: '#545c64',
       text_color: '#fff',
-      isCollapse: true
+      isCollapse: false
     });
-
-    const menuOpen = () => {
-      console.log(123);
+    // 监听浏览器宽度
+    const windowsWidth = () => {
+      window.onresize = () => {
+        state.isCollapse = document.documentElement.clientWidth < 1000 ? true : false;
+      };
     };
-    const menuClose = () => {
-      console.log(456);
-    };
-    const onMouseover = () => {
-      state.isCollapse = false;
-    };
-    const onMouseout = () => {
-      state.isCollapse = true;
-    };
+    // logo按钮
+    const logoBtn = () => router.push('/');
     onMounted(() => {
-      //   console.log(moduleCss);
+      windowsWidth();
     });
 
     return () => (
-      <div class={`w100 h100 aside`} onMouseover={onMouseover} onMouseout={onMouseout}>
+      <div class={`w100 h100 aside`}>
         <el-menu
           active-text-color={state.active_text_color}
           background-color={state.background_color}
-          //   class={`${moduleCss['el-menu-vertical-demo']} h100`}
           class={`el-menu-vertical-demo h100`}
           text-color={state.text_color}
-          open={menuOpen}
-          close={menuClose}
           collapse={state.isCollapse}>
+          <div class="logo">
+            <div class="row-center col-center h100 ">
+              <div class="cursor" onClick={logoBtn}>
+                <el-image class={!state.isCollapse ? 'isCollapse-t' : 'isCollapse-f'} src={state.isCollapse ? mini_logo : logo}></el-image>
+              </div>
+            </div>
+          </div>
           <MenuType />
         </el-menu>
       </div>

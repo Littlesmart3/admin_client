@@ -1,0 +1,31 @@
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  .el-sub-menu__title span {
+    display: inline;
+  }
+  .el-sub-menu__icon-arrow {
+    display: inline;
+  }
+}
+
+.el-menu-vertical-demo {
+  .el-sub-menu__title span {
+    display: none;
+  }
+  .el-sub-menu__icon-arrow {
+    display: none;
+  }
+}
+
+.logo {
+  height: 60px;
+}
+
+.isCollapse-t {
+  width: 100px;
+  height: 60px;
+}
+.isCollapse-f {
+  width: 50px;
+  height: 60px;
+}
