@@ -1,8 +1,9 @@
-import { faas, AnyObject } from './index';
+import { faas } from './index';
+import { AnyObject } from '@/assets/interface/index';
 
 export class HomeAPI {
   // 导航栏
-  static navList(): Promise<any> {
+  static navList(): Promise<AnyObject> {
     return faas.get('/home/nav_list');
   }
 }

@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'index',
     meta: { requireAuth: true },
-    component: (): RouteComponent => import('@/views/home/index.vue') //首页
+    component: (): RouteComponent => import('@/components/layout/index.vue') //首页
   },
   {
     path: '/login',
