@@ -4,7 +4,10 @@
       <el-aside><Menu ref="menuRef" :is_collapse="is_collapse" /> </el-aside>
       <el-container>
         <el-header><Header :is_collapse="is_collapse" :theme="theme" @changeCollapse="changeCollapse" @themeClick="themeClick" /> </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <el-skeleton :rows="4" /><br />
+          <el-skeleton :rows="7" />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -25,7 +28,8 @@ export default defineComponent({
     const state = reactive({
       is_collapse: menuRef.value?.is_collapse || false,
       theme: 0, // 主题 0 = 亮， 1 = 暗
-      flag: 0
+      flag: 0,
+      theme_color: '#252525'
     });
 
     // 折叠导航栏
@@ -69,6 +73,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/dark-style.scss';
+@import '@/assets/scss/light-style.scss';
 .home {
   .el-header {
     height: 50px;
@@ -76,6 +82,9 @@ export default defineComponent({
   }
   .el-aside {
     --el-aside-width: null;
+  }
+  .el-main {
+    background-color: if(true, $light-background, $dark-background);
   }
 }
 </style>

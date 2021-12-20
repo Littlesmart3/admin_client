@@ -93,7 +93,7 @@ export default defineComponent({
   }
   .el-sub-menu .el-menu-item {
     &:hover {
-      background-color: #1f2d3d !important;
+      background-color: #505050 !important;
     }
   }
 }
@@ -104,9 +104,9 @@ export default defineComponent({
     border: 0;
     .el-menu--inline {
       .el-sub-menu__title {
-        background-color: rgb(48, 65, 86) !important;
+        background-color: #3c3c3c !important;
       }
-      background-color: rgb(48, 65, 86) !important;
+      background-color: #3c3c3c !important;
     }
   }
 }

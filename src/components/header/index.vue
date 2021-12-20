@@ -1,5 +1,5 @@
 <template>
-  <div class="header h100 row-between">
+  <div class="header h100 row-between" :class="[theme ? 'theme-dark' : 'theme-light']">
     <div class="pl10 pr10 h100 col-center header-hover" @click="changeCollapse">
       <el-icon class="icon" color="#000">
         <expand v-if="is_collapse" />
@@ -106,5 +106,11 @@ export default defineComponent({
     width: 35px;
     height: 35px;
   }
+}
+.theme-light {
+  background-color: #fff;
+}
+.theme-dark {
+  background-color: #191919;
 }
 </style>
