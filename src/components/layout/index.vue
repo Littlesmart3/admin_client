@@ -84,7 +84,7 @@ export default defineComponent({
     --el-aside-width: null;
   }
   .el-main {
-    background-color: if(true, $light-background, $dark-background);
+    background-color: if(false, $light-background, $dark-background);
   }
 }
 </style>

@@ -12,6 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
+    meta: { requireAuth: true },
     component: (): RouteComponent => import('@/views/login/index.vue') //登录页面
   }
 ];
@@ -27,6 +28,7 @@ router.beforeEach((to, from, next) => {
       if (moment(new Date()).unix() > JSON.parse(localStorage.info).expire_time) {
         localStorage.clear();
       }
+      if (to.path === '/login') router.push('/');
       next();
     } else router.push('/login');
   } else {

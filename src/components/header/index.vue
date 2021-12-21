@@ -98,6 +98,7 @@ export default defineComponent({
   .icon {
     width: 20px;
     height: 20px;
+    color: if(true, $light-color, $dark-color);
   }
   .setting {
     width: 250px;
@@ -108,9 +109,11 @@ export default defineComponent({
   }
 }
 .theme-light {
-  background-color: #fff;
+  background-color: $light-background;
+  color: $light-color;
 }
 .theme-dark {
-  background-color: #191919;
+  background-color: $dark-background;
+  color: $dark-color;
 }
 </style>
