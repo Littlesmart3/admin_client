@@ -15,7 +15,7 @@
                   <template #title>
                     <span class="ml10">{{ element.name }} </span>
                   </template>
-                  <el-menu-item v-for="val in element.children" :key="val" :index="val.id.toString()">
+                  <el-menu-item v-for="val in element.children" :key="val.id" :index="val.id.toString()" @click="menuClick(val.id)">
                     <template #title>
                       <span class="ml10"> {{ val.name }}</span>
                     </template>
@@ -23,7 +23,7 @@
                 </el-sub-menu>
               </template>
               <template v-else>
-                <el-menu-item :index="element.id.toString()">
+                <el-menu-item :index="element.id.toString()" @click="menuClick(element.id)">
                   <template #title>
                     <span class="ml10"> {{ element.name }} </span>
                   </template>
@@ -33,10 +33,10 @@
           </el-sub-menu>
         </template>
         <template v-else>
-          <el-menu-item :index="item.id.toString()">
+          <el-menu-item :index="item.id.toString()" @click="menuClick(item.id)">
             <el-icon> <component :is="item.icon" /> </el-icon>
             <template #title>
-              <span @click="menuClick(item.id)">{{ item.name }}</span>
+              <span>{{ item.name }}</span>
             </template>
           </el-menu-item>
         </template>
@@ -71,7 +71,7 @@ export default defineComponent({
 
     // 导航栏点击
     const menuClick = (id: number) => {
-      console.log(id);
+      router.push('/setting/personal-center');
     };
     onBeforeMount(() => {
       if (document.documentElement.clientWidth < 1000) state.is_collapse = true;
