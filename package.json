@@ -1,5 +1,5 @@
 {
-  "name": "Blog",
+  "name": "admin-client",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
