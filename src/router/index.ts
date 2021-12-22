@@ -22,22 +22,22 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    if (localStorage.info) {
-      router.push('/');
-      next();
-    } else next();
-  } else if (to.meta?.requireAuth) {
-    if (localStorage.info) {
-      if (moment(new Date()).unix() > JSON.parse(localStorage.info).expire_time) localStorage.clear();
-      next();
-    } else {
-      router.push('/login');
-      next();
-    }
-  } else {
-    next();
-  }
+  // if (to.path === '/login') {
+  //   if (localStorage.info) {
+  //     router.push('/');
+  //     next();
+  //   } else next();
+  // } else if (to.meta?.requireAuth) {
+  //   if (localStorage.info) {
+  //     if (moment(new Date()).unix() > JSON.parse(localStorage.info).expire_time) localStorage.clear();
+  //     next();
+  //   } else {
+  //     router.push('/login');
+  //     next();
+  //   }
+  // } else {
+  //   next();
+  // }
 });
 
 export default router;
