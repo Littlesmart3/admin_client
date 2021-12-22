@@ -23,14 +23,22 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {
+  if (to.meta?.requireAuth) {
     if (localStorage.info) {
       if (moment(new Date()).unix() > JSON.parse(localStorage.info).expire_time) {
         localStorage.clear();
+        next();
       }
-      if (to.path === '/login') router.push('/');
+      if (to.path === '/login') {
+        router.push('/');
+        next();
+        return;
+      }
       next();
-    } else router.push('/login');
+    } else {
+      router.push('/login');
+      next();
+    }
   } else {
     next();
   }
