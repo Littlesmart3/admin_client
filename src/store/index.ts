@@ -1,21 +1,20 @@
-import { InjectionKey } from 'vue'
-import { createStore, Store } from 'vuex'
+import { createStore } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import tabs from './modules/tabs';
+import user_info from './modules/user-info';
 
-export interface State {
-  count: number
-}
+const modules = { tabs, user_info };
 
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export const store = createStore<State>({
-  state() {
-    return {
-      count: 0
-    }
+export default createStore({
+  state: {
+    aaa: 123
   },
-  mutations: {
-    increment(state) {
-      state.count++
-    }
-  }
-})
+  modules: {
+    tabs,
+    user_info
+  },
+  plugins: [createPersistedState()]
+});
+
+export type ModulesStateType = { [key in keyof typeof modules]: typeof modules[key]['state'] };
+export interface VuexState extends ModulesStateType {}

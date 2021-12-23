@@ -1,4 +1,3 @@
-import { store } from '@/store';
 import { createRouter, createWebHashHistory, RouteComponent, RouteRecordRaw } from 'vue-router';
 import moment from 'moment';
 

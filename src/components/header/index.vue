@@ -47,7 +47,6 @@ export default defineComponent({
   },
   setup(props, context) {
     const router = useRouter();
-
     const state = reactive({ user_avatar_url: '' });
     // 折叠导航栏
     const changeCollapse = () => {
@@ -76,8 +75,6 @@ export default defineComponent({
     };
 
     onBeforeMount(() => {
-      console.log(123);
-
       //
     });
     return { ...toRefs(state), changeCollapse, settingClick };

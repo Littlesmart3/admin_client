@@ -5,22 +5,8 @@
       <el-container>
         <el-header><Header :is_collapse="is_collapse" :theme="theme" @changeCollapse="changeCollapse" @themeClick="themeClick" /> </el-header>
         <el-main>
-          <template class="tag col-center">
-            <div class="pl10">
-              <el-tag
-                v-for="tag in tags_list"
-                :key="tag.id"
-                class="cursor"
-                size="medium"
-                type="info"
-                closable
-                :disable-transitions="false"
-                @click="tagClick(tag)"
-                @close="tagClose(tag)"
-              >
-                {{ tag.title }}
-              </el-tag>
-            </div>
+          <template class="tab col-center">
+            <div class="pl10"><Tabs /></div>
           </template>
           <div>
             <div v-if="true">
@@ -40,14 +26,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+import { AnyObject } from '@/assets/interface/index';
 import Menu from '../menu/index.vue';
 import Header from '../header/index.vue';
-import { AnyObject } from '@/assets/interface/index';
+import Tabs from '../tabs/index.vue';
 
 export default defineComponent({
   name: 'home',
-  components: { Menu, Header },
+  components: { Menu, Header, Tabs },
   setup() {
     const menuRef = ref<AnyObject | null>(null);
 
@@ -55,11 +42,7 @@ export default defineComponent({
       is_collapse: menuRef.value?.is_collapse || false,
       theme: 0, // 主题 0 = 亮， 1 = 暗
       flag: 0,
-      theme_color: '#252525',
-      tags_list: [
-        { title: 'Tab 1', id: 1, path: '/' },
-        { title: 'Tab 2', id: 2, path: '/' }
-      ]
+      theme_color: '#252525'
     });
 
     // 折叠导航栏
@@ -84,17 +67,9 @@ export default defineComponent({
       };
     };
 
-    const tagClose = (val: any) => {
-      state.tags_list = state.tags_list.filter((item: any) => item.id !== val.id);
-    };
-    const tagClick = (val: any) => {
-      console.log(val);
-    };
     const methods = {
       changeCollapse,
-      themeClick,
-      tagClose,
-      tagClick
+      themeClick
     };
     onBeforeMount(() => {
       state.is_collapse = document.documentElement.clientWidth < 1000 ? true : false;
@@ -122,13 +97,10 @@ export default defineComponent({
     // background-color: if(false, $light-background, $dark-background);
     background-color: $light-background;
     padding: 0;
-    .tag {
+    .tab {
       height: 40px;
       width: 100%;
       background-color: #f3f6f8;
-      .el-tag + .el-tag {
-        margin-left: 5px;
-      }
     }
   }
 }
