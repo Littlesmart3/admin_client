@@ -28,7 +28,10 @@
       <div class="pl10 pr10 h100 col-center header-hover">
         <el-icon class="icon" @click="settingClick(4)"><refresh /></el-icon>
       </div>
-      <div class="pl10 pr10 h100 col-center header-hover"><el-image class="user-avatar" :src="user_avatar_url" /></div>
+      <div class="pl10 pr10 h100 col-center header-hover">
+        <el-avatar class="user-avatar" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <!-- <el-image class="user-avatar" :src="user_avatar_url" /> -->
+      </div>
     </div>
   </div>
 </template>

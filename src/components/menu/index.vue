@@ -49,6 +49,7 @@
 import { defineComponent, onBeforeMount, reactive, toRefs, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { menu_list } from '@/assets/setting';
+import logo from '@/assets/img/logo.png';
 
 export default defineComponent({
   name: 'home',
@@ -66,7 +67,7 @@ export default defineComponent({
     const menu_lists = menu_list;
     const state = reactive({
       is_collapse: false, // menu是否折叠
-      logo_url: '' // logo链接
+      logo_url: logo // logo链接
     });
 
     // 导航栏点击

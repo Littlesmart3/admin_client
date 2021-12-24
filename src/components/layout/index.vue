@@ -1,5 +1,5 @@
 <template>
-  <div class="home h100">
+  <div class="layout h100">
     <el-container class="h100">
       <el-aside><Menu ref="menuRef" :is_collapse="is_collapse" /> </el-aside>
       <el-container>
@@ -9,7 +9,13 @@
             <div class="pl10"><Tabs /></div>
           </template>
           <div>
-            <div v-if="true">
+            <!-- <keep-alive>
+              <transition name="fade-transform" mode="out-in"> -->
+            <router-view v-show="true" />
+            <!-- </transition>
+            </keep-alive> -->
+
+            <!-- <div v-if="true">
               <el-skeleton :rows="4" /><br />
               <el-skeleton :rows="7" />
             </div>
@@ -17,7 +23,7 @@
               <transition name="fade-transform" mode="out-in">
                 <keep-alive v-show="false"> </keep-alive>
               </transition>
-            </router-view>
+            </router-view> -->
           </div>
         </el-main>
       </el-container>
@@ -33,7 +39,7 @@ import Header from '../header/index.vue';
 import Tabs from '../tabs/index.vue';
 
 export default defineComponent({
-  name: 'home',
+  name: 'layout',
   components: { Menu, Header, Tabs },
   setup() {
     const menuRef = ref<AnyObject | null>(null);
@@ -85,7 +91,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '@/assets/scss/dark-style.scss';
 @import '@/assets/scss/light-style.scss';
-.home {
+.layout {
   .el-header {
     height: 50px;
     padding: 0;
@@ -95,7 +101,9 @@ export default defineComponent({
   }
   .el-main {
     // background-color: if(false, $light-background, $dark-background);
-    background-color: $light-background;
+
+    background-color: #f3f6f8;
+    // background-color: $light-background;
     padding: 0;
     .tab {
       height: 40px;
