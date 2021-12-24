@@ -7,9 +7,12 @@ interface TabsModulesStateType {
 
 const state: TabsModulesStateType = {
   tags_list: [
-    { title: 'Tab 1', id: 1, path: '/' },
-    { title: 'Tab 2', id: 2, path: '/' },
-    { title: 'Tab 3', id: 3, path: '/' }
+    {
+      to: '/',
+      label: '首页',
+      name: '/',
+      param: {}
+    }
   ]
 };
 const mutations = {
@@ -18,12 +21,8 @@ const mutations = {
   }
 };
 const actions = {
-  async getTagsList(context: ActionContext<any, any>): Promise<any> {
-    try {
-      return [1, 2, 3, 4, 5];
-    } catch (error) {
-      return [];
-    }
+  async tabClose(val: any) {
+    state.tags_list = state.tags_list.filter((item: any) => item.id !== val.id);
   }
 };
 const getters = {};

@@ -11,7 +11,7 @@
       @click="tagClick(tag)"
       @close="tagClose(tag)"
     >
-      {{ tag.title }}
+      {{ tag.label }}
     </el-tag>
   </div>
 </template>
@@ -30,8 +30,7 @@ export default defineComponent({
     const router = useRouter();
     // const store = useStore<VuexState>();
     const store = useStore();
-    // const tags_list = computed(() => store.state.tabs.tags_list);
-    const tags_list = computed(() => []);
+    const tags_list = computed(() => store.state.tabs.tags_list);
     const state = reactive({
       tag_type: 'info'
     });
@@ -41,7 +40,8 @@ export default defineComponent({
     };
     // 关闭标签页
     const tagClose = (val: any) => {
-      store.state.tabs.tags_list = store.state.tabs.tags_list.filter((item: any) => item.id !== val.id);
+      const tags_list = store.state.tabs.tags_list.filter((item: any) => item.id !== val.id);
+      store.commit('setTagsList', tags_list);
     };
     onBeforeMount(() => {
       console.log(store.state);
