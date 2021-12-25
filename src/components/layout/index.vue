@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+import { computed, defineComponent, onBeforeMount, onUnmounted, reactive, ref, toRefs } from 'vue';
 import { AnyObject } from '@/assets/interface/index';
 import Menu from '../menu/index.vue';
 import Header from '../header/index.vue';
@@ -62,7 +62,7 @@ export default defineComponent({
     };
     // 显示器宽度监听
     const monitorWidth = () => {
-      window.onresize = () => {
+      window.addEventListener('resize', () => {
         const client_width = document.documentElement.clientWidth;
         if (state.flag) {
           if (state.is_collapse && client_width < 800) state.flag = 0;
@@ -70,7 +70,9 @@ export default defineComponent({
         } else {
           state.is_collapse = client_width < 1000 ? true : false;
         }
-      };
+      });
+
+      // window.onresize = () =>
     };
 
     const methods = {
@@ -81,6 +83,9 @@ export default defineComponent({
       state.is_collapse = document.documentElement.clientWidth < 1000 ? true : false;
       state.theme = new Date().getHours() > 6 && new Date().getHours() < 18 ? 0 : 1;
       monitorWidth();
+    });
+    onUnmounted(() => {
+      window.onresize = null;
     });
 
     return { ...toRefs(state), menuRef, ...methods };
@@ -104,7 +109,7 @@ export default defineComponent({
 
     background-color: #f3f6f8;
     // background-color: $light-background;
-    padding: 0;
+    padding: 0 0 20px 0;
     .tab {
       height: 40px;
       width: 100%;
