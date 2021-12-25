@@ -5,10 +5,10 @@
       <el-container>
         <el-header><Header :is_collapse="is_collapse" :theme="theme" @changeCollapse="changeCollapse" @themeClick="themeClick" /> </el-header>
         <el-main>
-          <template class="tab col-center">
+          <div class="tab col-center">
             <div class="pl10"><Tabs /></div>
-          </template>
-          <div>
+          </div>
+          <div class="pt20">
             <!-- <keep-alive>
               <transition name="fade-transform" mode="out-in"> -->
             <router-view v-show="true" />
@@ -105,15 +105,19 @@ export default defineComponent({
     --el-aside-width: null;
   }
   .el-main {
+    position: relative;
     // background-color: if(false, $light-background, $dark-background);
 
     background-color: #f3f6f8;
     // background-color: $light-background;
     padding: 0 0 20px 0;
     .tab {
+      position: fixed;
+      top: 50px;
       height: 40px;
       width: 100%;
       background-color: #f3f6f8;
+      z-index: 999;
     }
   }
 }
