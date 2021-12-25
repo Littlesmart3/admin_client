@@ -48,7 +48,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, reactive, toRefs, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { menu_list, menuType } from '@/assets/setting';
+import { menu_list } from '@/assets/setting';
 import logo from '@/assets/img/logo.png';
 import { getTreeList } from '@/utils/tools';
 
@@ -65,6 +65,7 @@ export default defineComponent({
       () => props.is_collapse,
       (val) => (state.is_collapse = val)
     );
+
     const menu_tree_lists = getTreeList(menu_list, 'parent_id');
     const state = reactive({
       is_collapse: false, // menu是否折叠
@@ -79,6 +80,7 @@ export default defineComponent({
     };
     onBeforeMount(() => {
       if (document.documentElement.clientWidth < 1000) state.is_collapse = true;
+      console.log(menu_list);
     });
     return { ...toRefs(state), menu_tree_lists, menuClick };
   }
