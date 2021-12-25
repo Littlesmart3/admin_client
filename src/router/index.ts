@@ -1,13 +1,11 @@
 import { createRouter, createWebHashHistory, RouteComponent, RouteRecordRaw } from 'vue-router';
 import moment from 'moment';
+import echarts from './modules/echarts';
+import excel from './modules/excel';
+import setting from './modules/setting';
+import ErrorPage from '@/components/error-page/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  // {
-  //   path: '/',
-  //   name: 'index',
-  //   meta: { requireAuth: true },
-  //   component: (): RouteComponent => import('@/components/layout/index.vue') //首页
-  // },
   {
     path: '/login',
     name: 'login',
@@ -24,13 +22,19 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requireAuth: true },
         component: (): RouteComponent => import('@/views/home/index.vue') //首页
       },
-      {
-        path: '/setting/personal-center',
-        name: 'personal-center',
-        meta: { requireAuth: true },
-        component: (): RouteComponent => import('@/views/setting/personal-center/index.vue') //登录页面
-      }
+      ...echarts,
+      ...excel,
+      ...setting
     ]
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: ErrorPage
+  },
+  {
+    path: '/:catchAll(.*)', // 不识别的path自动匹配404
+    redirect: '/404'
   }
 ];
 

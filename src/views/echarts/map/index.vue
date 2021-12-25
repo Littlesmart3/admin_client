@@ -1,17 +1,16 @@
 <template>
-  <div>setting</div>
+  <div class="">map</div>
 </template>
-
 <script lang="ts">
-import { defineComponent, onBeforeMount } from 'vue';
-
+import { defineComponent, onBeforeMount, reactive, toRefs } from 'vue';
 export default defineComponent({
-  name: 'home',
+  name: '',
   components: {},
   setup() {
+    const state = reactive({});
     onBeforeMount(() => {});
+    return { ...toRefs(state) };
   }
 });
 </script>
-
 <style lang="scss"></style>
